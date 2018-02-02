@@ -1,17 +1,31 @@
-const chai = require('chai')
-const nock = require('nock')
-const simple = require('simple-mock')
-
 const GitHub = require('../../')
-
+const nock = require('nock')
+const haveCypress = () =>
+  typeof Cypress === 'object'
+// not necessary in Cypress, but does not break
+const chai = require('chai')
+const simple = require('simple-mock')
 const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
+describe = mocha.describe
+it = mocha.it
+beforeEach = mocha.beforeEach
+afterEach = mocha.afterEach
 
-describe('deprecations', () => {
-  it('github.integrations.*', () => {
-    simple.mock(console, 'warn', () => {})
+describe.only('deprecations', () => {
+  if (haveCypress()) {
+    beforeEach(() => {
+      cy.stub(console, 'warn')
+    })
+  } else {
+    beforeEach(() => {
+      simple.mock(console, 'warn', () => {})
+    })
+    afterEach(() => {
+      simple.restore()
+    })
+  }
+
+  it('github.integrations.*', (done) => {
     nock('https://deprecations-test.com')
       .get('/app/installations')
       .reply(200, [])
@@ -19,30 +33,25 @@ describe('deprecations', () => {
     const github = new GitHub({
       host: 'deprecations-test.com'
     })
-    return github.integrations.getInstallations({})
-
+    github.integrations.getInstallations({})
     .then(() => {
-      console.warn.callCount.should.equal(2)
-
-      simple.restore()
-    })
+      // chai-expect is built into Cypress
+      // so this syntax is easier to have in Node and browser
+      expect(console.warn).to.be.calledTwice
+    }).then(done)
   })
 
   it('deprecated followRedirects option', () => {
-    simple.mock(console, 'warn', (msg) => {})
     GitHub({
       followRedirects: false
     })
-    console.warn.callCount.should.equal(1)
-    simple.restore()
+    expect(console.warn).to.be.calledOnce
   })
 
   it('deprecated Promise option', () => {
-    simple.mock(console, 'warn', (msg) => {})
     GitHub({
       Promise: {}
     })
-    console.warn.callCount.should.equal(1)
-    simple.restore()
+    expect(console.warn).to.be.calledOnce
   })
 })
