@@ -63,6 +63,8 @@
     "proxyquire": "^1.8.0",
     "semantic-release": "^12.2.2",
     "simple-mock": "^0.8.0",
+    "sinon": "^4.2.2",
+    "sinon-chai": "^2.14.0",
     "standard": "^10.0.3",
     "standard-markdown": "^4.0.2",
     "string-to-arraybuffer": "^1.0.0",
@@ -73,7 +75,7 @@
   "scripts": {
     "coverage": "nyc report --reporter=html && open coverage/index.html",
     "coverage:upload": "nyc report --reporter=text-lcov | coveralls",
-    "pretest": "standard && standard-markdown",
+    "pretest": "standard --verbose && standard-markdown",
     "test": "nyc mocha 'test/**/*-test.js'",
     "test:examples": "node test/examples.js",
     "build": "npm-run-all build:*",

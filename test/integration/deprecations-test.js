@@ -4,13 +4,21 @@ const haveCypress = () =>
   typeof Cypress === 'object'
 // not necessary in Cypress, but does not break
 const chai = require('chai')
-const simple = require('simple-mock')
-const mocha = require('mocha')
-describe = mocha.describe
-it = mocha.it
-beforeEach = mocha.beforeEach
-afterEach = mocha.afterEach
+const expect = chai.expect
+// const simple = require('simple-mock')
+const sinon = require('sinon')
+const sinonChai = require('sinon-chai')
+chai.use(sinonChai)
 
+// const mocha = require('mocha')
+// describe = mocha.describe
+// it = mocha.it
+// beforeEach = mocha.beforeEach
+// afterEach = mocha.afterEach
+
+/* eslint-env mocha */
+/* global cy */
+/* eslint-disable no-unused-expressions */
 describe.only('deprecations', () => {
   if (haveCypress()) {
     beforeEach(() => {
@@ -18,10 +26,10 @@ describe.only('deprecations', () => {
     })
   } else {
     beforeEach(() => {
-      simple.mock(console, 'warn', () => {})
+      sinon.stub(console, 'warn')
     })
     afterEach(() => {
-      simple.restore()
+      console.warn.restore()
     })
   }
 
