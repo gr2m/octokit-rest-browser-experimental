@@ -1,12 +1,6 @@
-const chai = require('chai')
+require('../mocha-options')
 const nock = require('nock')
-
 const GitHub = require('../../')
-
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
 
 describe('request errors', () => {
   it('timeout', () => {
@@ -23,7 +17,10 @@ describe('request errors', () => {
     return github.orgs.get({org: 'myorg'})
 
     .catch(error => {
-      error.code.should.equal('504')
+      // getting "TypeError: request.setTimeout is not a function(…)"
+      // when running this test in the browser
+      console.log(error)
+      expect(error.code).to.equal('504')
     })
   })
 
@@ -40,7 +37,8 @@ describe('request errors', () => {
     return github.orgs.get({org: 'myorg'})
 
     .catch(error => {
-      error.code.should.equal('500')
+      console.log(error)
+      expect(error.code).to.equal('500')
     })
   })
 })

@@ -1,12 +1,6 @@
-const chai = require('chai')
+require('../mocha-options')
 const fixtures = require('@octokit/fixtures')
-
 const GitHub = require('../../')
-
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
 
 describe('api.github.com', () => {
   it('github.projects.*ProjectCard()', () => {

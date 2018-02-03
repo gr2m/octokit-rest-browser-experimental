@@ -1,12 +1,6 @@
-const chai = require('chai')
+require('../mocha-options')
 const fixtures = require('@octokit/fixtures')
-
 const GitHub = require('../../')
-
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
 
 describe('api.github.com', () => {
   it('github.search.issues({q: "sesame repo:octokit-fixture-org/search-issues"})', () => {
@@ -22,8 +16,8 @@ describe('api.github.com', () => {
     return githubUserA.search.issues({q: 'sesame repo:octokit-fixture-org/search-issues'})
 
     .then((response) => {
-      response.data.total_count.should.equal(2)
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.total_count).to.equal(2)
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

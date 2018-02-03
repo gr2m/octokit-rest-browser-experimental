@@ -1,14 +1,8 @@
-const chai = require('chai')
+require('../mocha-options')
 const nock = require('nock')
-
 const GitHub = require('../../')
 
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-const should = chai.should()
-
-describe('smoke', () => {
+describe.only('smoke', () => {
   it('called as function', () => {
     GitHub()
   })
@@ -96,10 +90,10 @@ describe('smoke', () => {
     })
 
     .then((result) => {
-      github.hasNextPage(result).should.be.a('string')
-      github.hasPreviousPage(result).should.be.a('string')
-      github.hasFirstPage(result).should.be.a('string')
-      should.not.exist(github.hasLastPage(result))
+      expect(github.hasNextPage(result)).to.be.a('string')
+      expect(github.hasPreviousPage(result)).to.be.a('string')
+      expect(github.hasFirstPage(result)).to.be.a('string')
+      expect(github.hasLastPage(result)).not.to.exist
 
       const callback = () => {}
 
@@ -110,10 +104,10 @@ describe('smoke', () => {
               return reject(error)
             }
 
-            should.not.throw(() => {
+            expect(() => {
               github.hasPreviousPage(result)
-            })
-            should.not.exist(github.hasPreviousPage(result))
+            }).not.to.throw
+            expect(github.hasPreviousPage(result)).to.not.exist
 
             resolve()
           })
@@ -122,7 +116,7 @@ describe('smoke', () => {
         github.getNextPage(result).catch(callback),
         new Promise(resolve => {
           github.getLastPage(result, { foo: 'bar' }, (error) => {
-            error.code.should.equal('404')
+            expect(error.code).to.equal('404')
             resolve()
           })
         }),

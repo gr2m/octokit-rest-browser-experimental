@@ -1,12 +1,6 @@
-const chai = require('chai')
+require('../mocha-options')
 const nock = require('nock')
-
 const GitHub = require('../../')
-
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
 
 describe('request 304s', () => {
   it('304 etag', () => {
@@ -21,7 +15,7 @@ describe('request 304s', () => {
     return github.orgs.get({org: 'myorg', headers: {'If-None-Match': 'etag'}})
 
     .catch(exception => {
-      exception.code.should.equal(304)
+      expect(exception.code).to.equal(304)
     })
   })
   it('304 last-modified', () => {
@@ -36,7 +30,7 @@ describe('request 304s', () => {
     return github.orgs.get({org: 'myorg', headers: {'If-Modified-Since': 'Sun Dec 24 2017 22:00:00 GMT-0600 (CST)'}})
 
     .catch(exception => {
-      exception.code.should.equal(304)
+      expect(exception.code).to.equal(304)
     })
   })
 })
