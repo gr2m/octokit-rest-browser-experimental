@@ -16,3 +16,4 @@ doc/
 
 # browser builds
 dist/
+cypress/videos

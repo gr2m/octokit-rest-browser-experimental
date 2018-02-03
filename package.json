@@ -77,6 +77,7 @@
     "coverage:upload": "nyc report --reporter=text-lcov | coveralls",
     "pretest": "standard --verbose && standard-markdown",
     "test": "nyc mocha 'test/**/*-test.js'",
+    "test:integration": "nyc mocha 'test/integration/*-test.js'",
     "test:examples": "node test/examples.js",
     "build": "npm-run-all build:*",
     "prebuild:docs": "mkdirp doc/",
