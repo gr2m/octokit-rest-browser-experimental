@@ -18,8 +18,8 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      response.data.owner.login.should.equal('octokit-fixture-org')
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.owner.login).to.equal('octokit-fixture-org')
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

@@ -18,7 +18,7 @@ describe('api.github.com', () => {
     })
 
     .then((result) => {
-      result.data.should.be.an('array')
+      expect(result.data).to.be.an('array')
 
       return githubUserA.issues.createLabel({
         owner: 'octokit-fixture-org',
@@ -29,7 +29,7 @@ describe('api.github.com', () => {
     })
 
     .then((result) => {
-      result.data.name.should.equal('test-label')
+      expect(result.data.name).to.equal('test-label')
 
       return githubUserA.issues.getLabel({
         owner: 'octokit-fixture-org',
@@ -49,7 +49,7 @@ describe('api.github.com', () => {
     })
 
     .then((result) => {
-      result.data.name.should.equal('test-label-updated')
+      expect(result.data.name).to.equal('test-label-updated')
 
       return githubUserA.issues.deleteLabel({
         owner: 'octokit-fixture-org',
@@ -59,9 +59,9 @@ describe('api.github.com', () => {
     })
 
     .then((result) => {
-      result.data.should.equal('')
+      expect(result.data).to.equal('')
 
-      GitHubMock.pending().should.deep.equal([])
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

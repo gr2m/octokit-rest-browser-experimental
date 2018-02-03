@@ -11,8 +11,8 @@ describe('api.github.com', () => {
     return github.repos.getContent({owner: 'octokit-fixture-org', repo: 'hello-world', path: ''})
 
     .then((response) => {
-      response.data.length.should.equal(1)
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.length).to.equal(1)
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

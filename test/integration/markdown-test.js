@@ -20,7 +20,7 @@ b597b5d`,
     })
 
     .then((response) => {
-      response.data.should.equal(`<h3>Hello</h3>
+      expect(response.data).to.equal(`<h3>Hello</h3>
 <p><a href="https://github.com/octokit-fixture-org/hello-world/commit/b597b5d6eead8f1a9e9d3243cd70a890a6155ca8" class="commit-link"><tt>b597b5d</tt></a></p>`)
 
       return github.misc.renderMarkdownRaw({

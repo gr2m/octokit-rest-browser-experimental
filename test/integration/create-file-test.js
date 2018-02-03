@@ -22,8 +22,8 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      response.data.content.type.should.equal('file')
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.content.type).to.equal('file')
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

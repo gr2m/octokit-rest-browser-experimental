@@ -11,8 +11,8 @@ describe('api.github.com', () => {
     return github.orgs.get({org: 'octokit-fixture-org'})
 
     .then((response) => {
-      response.data.login.should.equal('octokit-fixture-org')
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.login).to.equal('octokit-fixture-org')
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

@@ -32,7 +32,7 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      response.data.length.should.equal(1)
+      expect(response.data.length).to.equal(1)
 
       return githubUserB.users.acceptRepoInvite({
         invitation_id: response.data[0].id
@@ -47,7 +47,7 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      response.data.length.should.equal(2)
+      expect(response.data.length).to.equal(2)
 
       return githubUserA.repos.removeCollaborator({
         owner: 'octokit-fixture-org',
@@ -64,8 +64,8 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      response.data.length.should.equal(1)
-      GitHubMock.pending().should.deep.equal([])
+      expect(response.data.length).to.equal(1)
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)

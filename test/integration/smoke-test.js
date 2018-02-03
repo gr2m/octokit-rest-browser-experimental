@@ -2,7 +2,7 @@ require('../mocha-options')
 const nock = require('nock')
 const GitHub = require('../../')
 
-describe.only('smoke', () => {
+describe('smoke', () => {
   it('called as function', () => {
     GitHub()
   })

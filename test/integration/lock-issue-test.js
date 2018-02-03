@@ -28,7 +28,7 @@ describe('api.github.com', () => {
     })
 
     .then((response) => {
-      GitHubMock.pending().should.deep.equal([])
+      expect(GitHubMock.pending()).to.deep.equal([])
     })
 
     .catch(GitHubMock.explain)
