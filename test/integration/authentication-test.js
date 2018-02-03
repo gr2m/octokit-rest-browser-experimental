@@ -1,12 +1,6 @@
-const chai = require('chai')
+require('../mocha-options')
 const nock = require('nock')
-
 const GitHub = require('../../')
-
-const mocha = require('mocha')
-const describe = mocha.describe
-const it = mocha.it
-chai.should()
 
 describe('authentication', () => {
   it('basic', () => {
@@ -159,20 +153,20 @@ describe('authentication', () => {
       host: 'authentication-test-host.com'
     })
 
-    ;(() => {
+    expect(() => {
       github.authenticate({})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'basic'})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'oauth'})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'token'})
-    }).should.throw(Error)
+    }).to.throw(Error)
   })
 })

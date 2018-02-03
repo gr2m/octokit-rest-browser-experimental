@@ -6,7 +6,7 @@ const nock = require('nock')
 /* eslint-env mocha */
 /* global cy */
 /* eslint-disable no-unused-expressions */
-describe.only('deprecations', () => {
+describe('deprecations', () => {
   beforeEach(() => {
     cy.stub(console, 'warn')
   })
