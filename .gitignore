@@ -16,4 +16,9 @@ doc/
 
 # browser builds
 dist/
+
+# cypress test files
+cypress/fixtures
+cypress/plugins
+cypress/support
 cypress/videos
