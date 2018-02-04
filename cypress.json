@@ -1,3 +1,4 @@
 {
-  "integrationFolder": "test/integration"
+  "integrationFolder": "test/integration",
+  "videoRecording": false
 }
