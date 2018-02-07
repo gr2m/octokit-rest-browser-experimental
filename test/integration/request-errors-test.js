@@ -1,9 +1,6 @@
-const chai = require('chai')
 const nock = require('nock')
 
 const GitHub = require('../../')
-
-chai.should()
 
 describe('request errors', () => {
   it('timeout', () => {
@@ -21,7 +18,7 @@ describe('request errors', () => {
     return github.orgs.get({org: 'myorg'})
 
     .catch(error => {
-      error.code.should.equal('504')
+      expect(error.code).to.equal('504')
     })
   })
 
@@ -38,7 +35,7 @@ describe('request errors', () => {
     return github.orgs.get({org: 'myorg'})
 
     .catch(error => {
-      error.code.should.equal('500')
+      expect(error.code).to.equal('500')
     })
   })
 })
