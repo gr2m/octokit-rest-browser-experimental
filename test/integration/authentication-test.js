@@ -1,9 +1,6 @@
-const chai = require('chai')
 const nock = require('nock')
 
 const GitHub = require('../../')
-
-chai.should()
 
 describe('authentication', () => {
   let github
@@ -131,20 +128,20 @@ describe('authentication', () => {
   })
 
   it('authenticate errors', () => {
-    ;(() => {
+    expect(() => {
       github.authenticate({})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'basic'})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'oauth'})
-    }).should.throw(Error)
+    }).to.throw(Error)
 
-    ;(() => {
+    expect(() => {
       github.authenticate({type: 'token'})
-    }).should.throw(Error)
+    }).to.throw(Error)
   })
 })
