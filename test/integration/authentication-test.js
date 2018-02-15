@@ -9,8 +9,6 @@ describe('authentication', () => {
     github = new GitHub({
       host: 'authentication-test-host.com'
     })
-    github.plugin(require('../../lib/plugins/endpoint-methods'))
-    github.plugin(require('../../lib/plugins/authentication'))
   })
 
   it('basic', () => {

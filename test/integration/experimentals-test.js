@@ -9,7 +9,6 @@ describe('authentication plugin', () => {
     github = new GitHub({
       host: 'authentication-plugin-test-host.com'
     })
-    github.plugin(require('../../lib/plugins/authentication'))
   })
 
   it('OAuth authentication with URL containing ?', () => {
