@@ -9,7 +9,6 @@ describe('deprecations', () => {
     github = new GitHub({
       host: 'deprecations-test.com'
     })
-    github.plugin(require('../../lib/plugins/endpoint-methods'))
     cy.stub(console, 'warn')
   })
 
