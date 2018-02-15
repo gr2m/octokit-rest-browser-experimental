@@ -9,7 +9,6 @@ describe('request 304s', () => {
     github = new GitHub({
       host: 'request-errors-test.com'
     })
-    github.plugin(require('../../lib/plugins/endpoint-methods'))
   })
 
   it('304 etag', () => {
